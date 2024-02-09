@@ -1,3 +1,14 @@
+<p align="center">
+	<img src="purpl.png" width=50" />
+</p>
+
+This Go module implements a server-side gRPC interceptor designed for purpose-limiting data minimization, ensuring that 
+only the necessary data as dictated by a JWT policy is exposed to service consumers. It dynamically modifies the gRPC 
+response based on the permissions and data handling rules (allowed, generalized, noised, reduced) specified in the JWT 
+claims. This approach enhances privacy by applying differential privacy techniques, generalizing, reducing, or 
+suppressing fields as required. The interceptor leverages RSA public keys for JWT validation, ensuring secure and 
+trustworthy communication.
+
 # purpl: PURPose Limitation 
 To use this Go module run:
 ```shell
@@ -23,3 +34,11 @@ s := grpc.NewServer(
 		grpc.UnaryInterceptor(purposelimiter.UnaryServerInterceptor(keyPath)), 
 )
 ```
+## JWT generation
+
+For JWT generation use the [purpl-jwt-go-rsa](https://github.com/PrivacyEngineering/purpl-jwt-go-rsa) or [purpl-jwt-go-ecdsa](https://github.com/PrivacyEngineering/purpl-jwt-go-ecdsa) libraries.
+
+## Examples
+- [**purpl-examples**](https://github.com/PrivacyEngineering/purpl-examples): A simple example to quickly try out the interceptor.
+
+- [**purpl-pizza-boutique**](https://github.com/PrivacyEngineering/purpl-pizza-boutique): A more complex use case using Google's Online Boutique microservice demo.
